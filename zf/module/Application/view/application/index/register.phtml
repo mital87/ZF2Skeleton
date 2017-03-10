@@ -1,0 +1,112 @@
+<?php
+$form = $this->registerForm;
+$form->prepare();
+?>
+
+<div id="signup">   
+    <h1>Register</h1>
+
+    <?php echo $this->form()->openTag($form); ?>
+
+    <div class="top-row">
+        <div class="field-wrap">
+            <label>
+                First Name<span class="req">*</span>
+            </label>
+            <?php echo $this->formInput($form->get('first_name')); ?>
+            <?php echo $this->formElementErrors($form->get('first_name')); ?>
+        </div>
+
+        <div class="field-wrap">
+            <label>
+                Last Name<span class="req">*</span>
+            </label>
+            <?php echo $this->formInput($form->get('last_name')); ?>
+            <?php echo $this->formElementErrors($form->get('last_name')); ?>
+        </div>
+    </div>
+
+    <div class="field-wrap">
+        <label>
+            Email Address<span class="req">*</span>
+        </label>
+        <?php echo $this->formInput($form->get('email')); ?>
+        <?php echo $this->formElementErrors($form->get('email')); ?>
+    </div>
+
+    <div class="field-wrap">
+        <label>
+            Birth Date<span class="req">*</span>
+        </label>
+        <?php echo $this->formInput($form->get('birth_date')); ?>
+        <?php echo $this->formElementErrors($form->get('birth_date')); ?>
+    </div>
+
+    <div class="field-wrap">
+        <label>
+            Password<span class="req">*</span>
+        </label>
+        <?php echo $this->formInput($form->get('password')); ?>
+        <?php echo $this->formElementErrors($form->get('password')); ?>
+    </div>
+
+    <div class="field-wrap">
+        <label>
+            Confirm Password<span class="req">*</span>
+        </label>
+        <?php echo $this->formInput($form->get('confirm_password')); ?>
+        <?php echo $this->formElementErrors($form->get('confirm_password')); ?>
+    </div>
+
+
+    <div class="field-wrap">
+        <?php echo $this->formSelect($form->get('gender')); ?>
+        <?php echo $this->formElementErrors($form->get('gender')); ?>
+    </div>
+
+    <div class="field-wrap">
+        <?php echo $this->formFile($form->get('image')); ?>
+        <?php echo $this->formElementErrors($form->get('image')); ?>
+    </div>
+    <div id="results">Your captured image will appear here...</div>
+    <div id="my_camera"></div>
+    <input type=button value="Take Snapshot" onClick="take_snapshot()">
+    <p class="forgot"><a href="<?php echo $this->url('home'); ?>">Login</a></p>
+    <button class="button button-block" type="submit">Register</button> 
+
+    <?php echo $this->form()->closeTag(); ?>
+
+</div>
+<script src="<?php echo $this->basePath(); ?>/asset/js/webcam.js"></script>
+<script>
+        $(function () {
+            $("#birth_date").datepicker({
+                showButtonPanel: true,
+                maxDate: "0D"
+            });
+        });
+        Webcam.set({
+            width: 320,
+            height: 240,
+            image_format: 'jpeg',
+            jpeg_quality: 90
+        });
+        Webcam.attach('#my_camera');
+
+        function take_snapshot() {
+            // take snapshot and get image data
+            Webcam.snap(function (data_uri) {
+                // display results in page
+                document.getElementById('results').innerHTML =
+                        '<h2>Here is your image:</h2>' +
+                        '<img src="' + data_uri + '"/>';
+                Webcam.upload(data_uri, '<?php echo $this->url('home', array("action"=>"upload")); ?>', function (code, text) {
+                    console.log(code);
+                    console.log(text);
+                    // Upload complete!
+                    // 'code' will be the HTTP response code from the server, e.g. 200
+                    // 'text' will be the raw response content
+                });
+            });
+        }
+</script>

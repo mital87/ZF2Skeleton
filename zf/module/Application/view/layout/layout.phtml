@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html >
+    <head>
+        <meta charset="UTF-8">
+        <title>Zend Form</title>
+        <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/asset/css/jquery-ui.css">
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/asset/css/normalize.css">
+        <link rel="stylesheet" href="<?php echo $this->basePath(); ?>/asset/css/style.css">
+        <script src='<?php echo $this->basePath(); ?>/asset/js/jquery.min.js'></script>
+    </head>
+
+    <body>
+        <div class="form">
+            <div class="tab-content">
+                <?php echo $this->flashMessenger()->render('error', array('alert', 'alert-danger')); ?>
+                <?php echo $this->flashMessenger()->render('success', array('alert', 'alert-success')); ?>
+
+                <?php echo $this->content; ?>
+            </div>
+        </div> <!-- /form -->
+
+        <script src="<?php echo $this->basePath(); ?>/asset/js/jquery-ui.js"></script>
+        <script src="<?php echo $this->basePath(); ?>/asset/js/index.js"></script>
+    </body>
+</html>

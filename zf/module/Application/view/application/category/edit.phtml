@@ -1,0 +1,134 @@
+<?php
+
+$form = $this->data;
+$form->prepare();
+?>
+
+<div>
+    <h1>Contact Form</h1>
+    <?php echo $this->form()->openTag($form); ?>
+    <div class="field-wrap">
+        <label>
+            Name<span class="req">*</span>
+        </label>
+        <?php echo $this->formInput($form->get('name')); ?>
+        <?php echo $this->formElementErrors($form->get('name')); ?>
+
+    </div>
+    
+    <div class="field-wrap">
+        <label>
+            Contact Number<span class="req">*</span>
+        </label>
+        <?php echo $this->formInput($form->get('contactno')); ?>
+        <?php echo $this->formElementErrors($form->get('contactno')); ?>
+
+    </div>
+    
+    <div class="field-wrap">
+        <label>
+            Email<span class="req">*</span>
+        </label>
+        <?php echo $this->formInput($form->get('email')); ?>
+        <?php echo $this->formElementErrors($form->get('email')); ?>
+    </div>
+    
+    <div class="field-wrap">
+        <label>
+            Post<span class="req">*</span>
+        </label>
+        <?php echo $this->formSelect($form->get('post')); ?>
+        <?php echo $this->formElementErrors($form->get('post')); ?>
+    </div>
+    
+    <button class="button button-block" type="submit">Edit</button>
+    
+    <?php echo $this->form()->closeTag(); ?>
+</div>
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+    $("#contact").validate({
+    
+        // Specify the validation rules
+        rules: {
+            name: {
+                required : true,
+            },
+            contactno:{
+              required : true, 
+                number : true,
+            },
+//            categoryimage: {
+//                    extension: "jpg|png|jpeg|gif"
+//                },
+//            gender: "required",
+//            address: "required",
+//            email: {
+//                required: true,
+//                email: true
+//            },
+//            username: "required",
+//            password: {
+//                required: true,
+//                minlength: 5
+//            }
+        },
+        
+        // Specify the validation error messages
+        messages: {
+            name: {
+                required: "Please enter your name"
+            },
+            contactno : {
+                required : "please enter number",
+                number : "enter number only"
+            }
+//            categoryimage: {
+//                    extension: "Please upload only jpg, png, jpeg or gif image"
+//                }
+//            gender: "Please specify your gender",
+//            address: "Please enter your address",
+//            email: "Please enter a valid email address",
+//            username: "Please enter a valid username",
+//            password: {
+//                required: "Please provide a password",
+//                minlength: "Your password must be at least 5 characters long"
+//            }
+        },
+        
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+    
+//                    $.ajax({
+//                        url: "<?php echo $this->url("user", array("action" => "edit")); ?>",
+//                        type: "POST",
+//                        data: new FormData(form),
+//                        processData: false,
+//                        contentType: false,
+//                        dataType: "json",
+//                        success: function (response) {
+//                            $(".alert").hide();
+//                            if (response.success) {
+//                                promptus.showSuccessMessage(response.success);
+//                                setTimeout(function () {
+//                                    window.location.href = "<?php echo $this->url("user", array("action" => "profile")); ?>";
+//                                }, 500);
+//                            } else {
+//                                $("#errormsg_gen").empty();
+//                                promptus.showErrorMessage(response.errors);
+//                                $("#errormsg_gen").html(response.errors).show();
+//                                $("#profile_basic_info").val(response.token);
+//                                promptus.close();
+//                            }
+//                            next();
+//                        },
+//                        error: next
+//                    });
+
+});    
+</script>

@@ -1,0 +1,22 @@
+<?php
+$view = $this->view;
+?>
+
+<table class="table">
+    <tr>
+        <th>Name</th>
+        <th>contactno</th>
+        <th>email</th>
+        <th>post</th>
+    </tr>
+    <?php foreach($view as $key=>$value):  ?>
+    <tr>
+        <td><?php echo $value->getName(); ?></td>
+        <td><?php echo $value->getContactno(); ?></td>
+        <td><?php echo $value->getEmail(); ?></td>
+        <td><?php echo $value->getPost(); ?></td>
+    </tr>
+    <p class="forgot"><a href="<?php echo $this->url('category', array('action' => 'delete','id'=>$value->getId())); ?>">Delete</a></p>
+    <?php endforeach;  ?>
+</table>
+

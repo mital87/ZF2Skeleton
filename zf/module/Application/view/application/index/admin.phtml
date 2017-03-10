@@ -1,0 +1,37 @@
+
+<div id="home">   
+    <h1>Home</h1>
+ <p class="forgot"><a href="<?php echo $this->url('home', array('action' => 'logout')); ?>">LogOut</a></p>
+ 
+ <?php if($user->getImage() !="") { ?>
+ <div id="profile" style="text-align: center;">
+        <img src="<?php echo BASE_URI."asset/image/".$user->getImage(); ?>">
+    </div>
+ <?php } ?>
+    <table width="100%">
+        <tr>
+            <th width="40%" >First Name</th>
+            <td><?php echo $user->getFirstName(); ?></td>
+        </tr>
+        <tr>
+            <th>Last Name</th>
+            <td><?php echo $user->getLastName(); ?></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><?php echo $user->getEmail(); ?></td>
+        </tr>
+        <tr>
+            <th>Gender</th>
+            <td><?php echo $user->getGenderValue(); ?></td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td><?php echo $user->getAge(); ?></td>
+        </tr>
+        
+    </table>
+
+    
+</div>
+
